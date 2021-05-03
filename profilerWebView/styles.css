@@ -1,0 +1,106 @@
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#sidebar {
+    flex-basis: 50px;
+    overflow-x: hidden;
+    transition: flex-basis 200ms ease-out;
+}
+
+#sidebar:hover,
+#sidebar.expanded {
+    flex-basis: 220px;
+}
+
+#sidebar:not(:hover):not(.expanded) .label .count {
+    border-radius: 50%;
+    border: 1px solid #eee;
+    height: 8px;
+    min-width: 0;
+    padding: 0;
+    right: 4px;
+    text-indent: -9999px;
+    top: 50%;
+    width: 8px;
+}
+
+#sidebar #sidebar-shortcuts .shortcuts {
+    position: relative;
+    padding: 16px 10px;
+}
+
+#sidebar:not(:hover) #sidebar-shortcuts .shortcuts .visible-small {
+    display: inherit;
+}
+
+#sidebar #sidebar-shortcuts .shortcuts {
+    width: 200%;
+}
+
+#sidebar #sidebar-shortcuts .btn {
+    display: inline;
+}
+
+body .container {
+    max-width: 100%;
+}
+
+body,
+.tab-navigation li,
+table,
+tr,
+th,
+td,
+.metric,
+#timeline-control,
+.card,
+.exception-summary,
+.trace-details {
+    background-color: #333;
+    color: #999;
+}
+
+.highlight .word,
+.trace-file-path,
+.trace-file-path a,
+.trace-code li code {
+    color: #999;
+}
+
+li:not(.selected) span[style="color: #222222"] {
+    color: #999 !important;
+}
+
+.tab-navigation li.disabled,
+table thead th,
+.metric .label,
+.trace-head,
+.trace-code,
+.trace-line:hover {
+    background-color: #222;
+    color: #666;
+}
+
+.tab-navigation li,
+.empty,
+table,
+table thead th,
+table tbody th,
+table tbody td,
+.metric,
+body .sf-profiler-timeline canvas,
+.card,
+.exception-summary,
+.trace-details,
+tr.status-error td,
+tr.status-warning td {
+    border-color: #444;
+}
+
+.sf-profiler-timeline canvas,
+.trace-code li.selected {
+    background-color: #BBB;
+}

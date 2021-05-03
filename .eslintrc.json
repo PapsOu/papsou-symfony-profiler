@@ -1,0 +1,22 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "semi": "off",
+        "@typescript-eslint/naming-convention": "warn",
+        "@typescript-eslint/semi": "never",
+        "curly": "warn",
+        "eqeqeq": "warn",
+        "no-throw-literal": "warn"
+    },
+    "ignorePatterns": [
+        "**/*.d.ts"
+    ]
+}
