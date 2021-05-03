@@ -10,13 +10,10 @@ Having access to the Symfony's dev cache folder.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
 * `papsou-symfony-profiler.symfonyCacheDir`: the project root relative cache directory path. e.g: `var/cache/dev`
+* `papsou-symfony-profiler.ignoreUrlRegex`: an array of regexp used to ignore some request urls. e.g: ["style\\.css$", ".*\\.map$"]
 
 ## Known Issues
 
@@ -25,6 +22,7 @@ This extension contributes the following settings:
 ### 1.1.1
 
 Clean up code
+Update README
 
 ### 1.1.0
 
