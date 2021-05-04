@@ -17,7 +17,7 @@ export class Token extends vscode.TreeItem {
             status = 'success'
         } else if (token.status >= 300 && token.status < 400) {
             status = 'warning'
-        } else if (token.status >= 400 && token.status < 500) {
+        } else if (token.status >= 400) {
             status = 'error'
         }
 
