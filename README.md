@@ -19,6 +19,14 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.1.3
+
+Fix css theme for dump private / protected / public property names
+
+### 1.1.2
+
+First release
+
 ### 1.1.1
 
 Clean up code
