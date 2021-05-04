@@ -66,7 +66,10 @@ td,
 .highlight .word,
 .trace-file-path,
 .trace-file-path a,
-.trace-code li code {
+.trace-code li code,
+#collector-content .sf-dump-private,
+#collector-content .sf-dump-protected,
+#collector-content .sf-dump-public {
     color: #999;
 }
 
