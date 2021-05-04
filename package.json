@@ -4,7 +4,7 @@
   "repository": "https://github.com/PapsOu/papsou-symfony-profiler",
   "displayName": "Symfony Profiler",
   "description": "List and access symfony profilers information directly in Visual Studio Code.",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "icon": "img/icon.png",
   "engines": {
     "vscode": "^1.55.0"

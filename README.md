@@ -19,6 +19,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.1.5
+
+Fix http 500 icon
+
 ### 1.1.4
 
 Fix css theme for dump focus and search input
