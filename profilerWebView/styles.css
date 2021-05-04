@@ -58,7 +58,9 @@ td,
 #timeline-control,
 .card,
 .exception-summary,
-.trace-details {
+.trace-details,
+pre.sf-dump .sf-dump-search-wrapper > *,
+pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
     background-color: #333;
     color: #999;
 }
@@ -77,12 +79,19 @@ li:not(.selected) span[style="color: #222222"] {
     color: #999 !important;
 }
 
+:focus-visible,
+:focus {
+    outline: transparent auto 0px !important;
+}
+
 .tab-navigation li.disabled,
 table thead th,
 .metric .label,
 .trace-head,
 .trace-code,
-.trace-line:hover {
+.trace-line:hover,
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
     background-color: #222;
     color: #666;
 }
@@ -99,7 +108,8 @@ body .sf-profiler-timeline canvas,
 .exception-summary,
 .trace-details,
 tr.status-error td,
-tr.status-warning td {
+tr.status-warning td,
+pre.sf-dump .sf-dump-search-wrapper > * {
     border-color: #444;
 }
 
