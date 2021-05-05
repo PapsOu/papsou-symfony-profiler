@@ -19,6 +19,11 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.1.6
+
+Dump panel css fix
+Add purge token command
+
 ### 1.1.5
 
 Fix http 500 icon

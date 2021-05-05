@@ -65,6 +65,12 @@ pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
     color: #999;
 }
 
+#collector-content .sf-dump pre.sf-dump,
+#collector-content .sf-dump .trace {
+    background-color: #444;
+    color: #999;
+}
+
 .highlight .word,
 .trace-file-path,
 .trace-file-path a,
@@ -109,7 +115,9 @@ body .sf-profiler-timeline canvas,
 .trace-details,
 tr.status-error td,
 tr.status-warning td,
-pre.sf-dump .sf-dump-search-wrapper > * {
+pre.sf-dump .sf-dump-search-wrapper > *,
+#collector-content .sf-dump pre.sf-dump,
+#collector-content .sf-dump .trace {
     border-color: #444;
 }
 

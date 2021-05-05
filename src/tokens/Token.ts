@@ -37,17 +37,10 @@ export class Token extends vscode.TreeItem {
         const tokenDate = new Date()
         tokenDate.setTime(this.token.time * 1000)
 
-        return ''
-            // label
-            .concat(this.token.method)
-            .concat(' ')
-            .concat(this.token.status.toString())
-            .concat(' - ')
-            .concat(this.token.url)
-            .concat('\n')
-            // description
-            .concat('[IP: ').concat(this.token.clientIp).concat(']\n')
-            .concat('[Time: ').concat(tokenDate.toLocaleString()).concat(']\n')
+        return `${this.token.method} ${this.token.status.toString()} - ${this.token.url}
+            [IP:${this.token.clientIp}]
+            [Time: ${tokenDate.toLocaleString()}]
+        `
     }
 
     public setExpanded(): void {
