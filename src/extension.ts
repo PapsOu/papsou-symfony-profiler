@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
 import * as fs from 'fs'
+import * as rimraf from 'rimraf'
 import { exec } from 'child_process'
 import { get, IncomingMessage } from 'http'
 
@@ -44,6 +45,60 @@ export function activate(context: vscode.ExtensionContext) {
                 )
             )
             tokenListProvider.refresh()
+        }),
+
+        // PURGE
+
+        vscode.commands.registerCommand('papsou-symfony-profiler.purge', (token?: Token) => {
+            let profilerPath = path.join(
+                wsRoot,
+                vscode.workspace
+                    .getConfiguration('papsou-symfony-profiler')
+                    .get('symfonyCacheDir', 'var/cache/dev'),
+                'profiler'
+            )
+
+            if (token !== undefined) {
+                const profilerIndex = path.join(profilerPath, 'index.csv')
+                const filterToken = (data: string) => {
+                    return data
+                        .split('\n')
+                        .filter((val, i) => val.substr(0, 6) !== token.token.token)
+                        .join('\n')
+                }
+
+                fs.readFile(profilerIndex, 'utf8', (err, data) => {
+                    const filteredData = filterToken(data)
+                    console.log(filteredData)
+                    fs.writeFile(profilerIndex, filteredData, 'utf8', err2 => {
+                    })
+                })
+
+                profilerPath = path.join(
+                    profilerPath,
+                    token.token.token.substr(4,2),
+                    token.token.token.substr(2,2),
+                    token.token.token
+                )
+
+                fs.unlink(profilerPath, (err) => {
+                    if (err !== null) {
+                        console.error(err)
+                        vscode.window.showErrorMessage(
+                            `Cannot remove token ${token.token.token} at path ${profilerPath}`
+                        )
+                    }
+                })
+            } else {
+                rimraf(profilerPath, (err) => {
+                    if (err !== null) {
+                        console.error(err)
+                        vscode.window.showErrorMessage(`Cannot remove profiler dir ${profilerPath}`)
+                    }
+
+                    tokenListProvider.refresh()
+                })
+            }
         }),
 
         // OPEN TOKEN
@@ -97,13 +152,13 @@ export function activate(context: vscode.ExtensionContext) {
                                                 // open standard links
 
                                                 if (message.url.includes('?')) {
-                                                    token.tokenUrl = token.token.token.concat('?').concat(message.url.split('?')[1])
+                                                    token.tokenUrl = `${token.token.token}?${message.url.split('?')[1]}`
                                                     vscode.commands.executeCommand('papsou-symfony-profiler.open-token', token)
                                                 }
                                             } else if (message.command == 'open-native-link') {
 
                                                 // open ide:// links
-                                                exec('xdg-open "'.concat(message.url).concat('"'))
+                                                exec(`xdg-open "${message.url}"`)
                                             }
                                         },
                                         undefined,
