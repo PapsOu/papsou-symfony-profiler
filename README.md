@@ -19,6 +19,10 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.1.7
+
+Ignore toggle link in profiler for webview navigation
+
 ### 1.1.6
 
 Dump panel css fix

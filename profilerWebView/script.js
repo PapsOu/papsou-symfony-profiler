@@ -12,7 +12,7 @@
                     command: 'open-native-link',
                     url: targetUrl
                 });
-            } else if (!targetLink.classList.contains('sf-dump-ref')) {
+            } else if (!targetLink.classList.contains('sf-dump-ref') && !targetLink.classList.contains('toggle-button')) {
                 vscode.postMessage({
                     command: 'open-link',
                     url: targetUrl
