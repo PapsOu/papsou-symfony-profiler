@@ -4,7 +4,7 @@
   "repository": "https://github.com/PapsOu/papsou-symfony-profiler",
   "displayName": "Symfony Profiler",
   "description": "List and access symfony profilers information directly in Visual Studio Code.",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "icon": "img/icon.png",
   "engines": {
     "vscode": "^1.55.0"
@@ -22,26 +22,17 @@
       {
         "command": "papsou-symfony-profiler.refresh",
         "title": "Symfony Profiler > Refresh",
-        "icon": {
-          "light": "img/refresh.svg",
-          "dark": "img/refresh.svg"
-        }
+        "icon": "$(refresh)"
       },
       {
         "command": "papsou-symfony-profiler.purge",
         "title": "Symfony Profiler > Purge",
-        "icon": {
-          "light": "img/trash.svg",
-          "dark": "img/trash.svg"
-        }
+        "icon": "$(trash)"
       },
       {
         "command": "papsou-symfony-profiler.open-token",
         "title": "Symfony Profiler > Open Token",
-        "icon": {
-          "light": "img/open.svg",
-          "dark": "img/open.svg"
-        }
+        "icon": "$(go-to-file)"
       }
     ],
     "viewsContainers": {
@@ -56,7 +47,7 @@
     "viewsWelcome": [
       {
         "view": "papsou-symfony-profiler-view",
-        "contents": "No profiler token found.\n[Refresh](command:papsou-symfony-profiler.refresh)"
+        "contents": "No profiler token found.\n[Refresh](command:papsou-symfony-profiler.refresh)\n\nOr configure extension for current workspace\n[Configure](command:workbench.action.openWorkspaceSettingsFile)"
       }
     ],
     "views": {
@@ -99,6 +90,10 @@
         "papsou-symfony-profiler.symfonyCacheDir": {
           "type": "string",
           "description": "The project root relative path to the symfony dev cache folder."
+        },
+        "papsou-symfony-profiler.profilerBaseUrl": {
+          "type": "string",
+          "description": "The public accessible URL of the profiler (without or without trailing slash). e.g http://127.0.0.1/app_dev.php/_profiler/"
         },
         "papsou-symfony-profiler.ignoreUrlRegex": {
           "type": "array",

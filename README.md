@@ -14,10 +14,16 @@ This extension contributes the following settings:
 
 * `papsou-symfony-profiler.symfonyCacheDir`: the project root relative cache directory path. e.g: `var/cache/dev`
 * `papsou-symfony-profiler.ignoreUrlRegex`: an array of regexp used to ignore some request urls. e.g: ["style\\.css$", ".*\\.map$"]
+* `papsou-symfony-profiler.profilerBaseUrl`: the base URL where you access your symfony profiler. e.g: `http://127.0.0.1/app_dev.php/_profiler/`
 
 ## Known Issues
 
 ## Release Notes
+
+### 1.1.8
+
+Fix icons (using native ones)
+Cleanup releases
 
 ### 1.1.7
 
