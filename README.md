@@ -19,6 +19,11 @@ This extension contributes the following settings:
 
 ## Release Notes
 
+### 1.1.8
+
+Fix icons (using native ones)
+Cleanup releases
+
 ### 1.1.7
 
 Ignore toggle link in profiler for webview navigation

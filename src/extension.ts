@@ -104,72 +104,84 @@ export function activate(context: vscode.ExtensionContext) {
         // OPEN TOKEN
 
         vscode.commands.registerCommand('papsou-symfony-profiler.open-token', (token: Token) => {
-            const baseUrl = token.token.url.split('/app_dev.php')[0]
-            const profilerUrl = baseUrl
-                .concat('/app_dev.php/_profiler/')
-                .concat(token.tokenUrl !== undefined ? token.tokenUrl : token.token.token)
+            let profilerBaseUrl: string = vscode.workspace
+                .getConfiguration('papsou-symfony-profiler')
+                .get('profilerBaseUrl', '')
 
-            if (profilerWebViewInstance !== undefined) {
-                profilerWebViewInstance.dispose()
-            }
-
-            profilerWebViewInstance = vscode.window.createWebviewPanel(
-                'papsou-symfony-profiler.profiler-web-view',
-                token.token.token,
-                vscode.ViewColumn.One,
-                {
-                    enableScripts: true,
-                    enableCommandUris: true,
-                    retainContextWhenHidden: true,
-                    localResourceRoots: []
+            if (profilerBaseUrl === '') {
+                vscode.window.showErrorMessage('Please define configuration key `papsou-symfony-profiler.profilerBaseUrl` in order to show profiler pages.')
+                vscode.commands.executeCommand('workbench.action.openWorkspaceSettingsFile')
+            } else {
+                console.log(profilerBaseUrl)
+                console.log(profilerBaseUrl.substr(-1, 1))
+                if (profilerBaseUrl.substr(-1, 1) !== '/') {
+                    profilerBaseUrl = profilerBaseUrl.concat('/')
                 }
-            )
+                const profilerUrl = profilerBaseUrl
+                    .concat(token.tokenUrl !== undefined ? token.tokenUrl : token.token.token)
 
-            get(profilerUrl, (res: IncomingMessage) => {
-                let pageContent = ''
-                res
-                    .on('data', (chunk) => {
-                        pageContent += chunk
-                    })
-                    .on('end', () => {
-                        fs.readFile(path.join(__filename, '..', '..', 'profilerWebView', 'styles.css'), 'utf8', (error, style) => {
+                if (profilerWebViewInstance !== undefined) {
+                    profilerWebViewInstance.dispose()
+                }
 
-                            fs.readFile(path.join(__filename, '..', '..', 'profilerWebView', 'script.js'), 'utf8', (error, script) => {
+                profilerWebViewInstance = vscode.window.createWebviewPanel(
+                    'papsou-symfony-profiler.profiler-web-view',
+                    token.token.token,
+                    vscode.ViewColumn.One,
+                    {
+                        enableScripts: true,
+                        enableCommandUris: true,
+                        retainContextWhenHidden: true,
+                        localResourceRoots: []
+                    }
+                )
 
-                                pageContent = pageContent.replace(
-                                    '</body>',
-                                    `<style>${style}</style><script type="text/javascript">${script}</script></body>`
-                                )
+                get(profilerUrl, (res: IncomingMessage) => {
+                    let pageContent = ''
+                    res
+                        .on('data', (chunk) => {
+                            pageContent += chunk
+                        })
+                        .on('end', () => {
+                            fs.readFile(path.join(__filename, '..', '..', 'profilerWebView', 'styles.css'), 'utf8', (error, style) => {
 
-                                if (profilerWebViewInstance !== undefined) {
-                                    profilerWebViewInstance.webview.html = pageContent
+                                fs.readFile(path.join(__filename, '..', '..', 'profilerWebView', 'script.js'), 'utf8', (error, script) => {
 
-                                    profilerWebViewInstance.webview.onDidReceiveMessage(
-                                        message => {
-
-                                            if (message.command == 'open-link') {
-
-                                                // open standard links
-
-                                                if (message.url.includes('?')) {
-                                                    token.tokenUrl = `${token.token.token}?${message.url.split('?')[1]}`
-                                                    vscode.commands.executeCommand('papsou-symfony-profiler.open-token', token)
-                                                }
-                                            } else if (message.command == 'open-native-link') {
-
-                                                // open ide:// links
-                                                exec(`xdg-open "${message.url}"`)
-                                            }
-                                        },
-                                        undefined,
-                                        context.subscriptions
+                                    pageContent = pageContent.replace(
+                                        '</body>',
+                                        `<style>${style}</style><script type="text/javascript">${script}</script></body>`
                                     )
-                                }
+
+                                    if (profilerWebViewInstance !== undefined) {
+                                        profilerWebViewInstance.webview.html = pageContent
+
+                                        profilerWebViewInstance.webview.onDidReceiveMessage(
+                                            message => {
+
+                                                if (message.command == 'open-link') {
+
+                                                    // open standard links
+
+                                                    if (message.url.includes('?')) {
+                                                        token.tokenUrl = `${token.token.token}?${message.url.split('?')[1]}`
+                                                        vscode.commands.executeCommand('papsou-symfony-profiler.open-token', token)
+                                                    }
+                                                } else if (message.command == 'open-native-link') {
+
+                                                    // open ide:// links
+                                                    exec(`xdg-open "${message.url}"`)
+                                                }
+                                            },
+                                            undefined,
+                                            context.subscriptions
+                                        )
+                                    }
+                                })
                             })
                         })
-                    })
-            })
-            .end()
+                })
+                .end()
+            }
         })
     ]
 
