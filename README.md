@@ -1,5 +1,7 @@
 # papsou-symfony-profiler README
 
+![Extension in action](img/readme.png)
+
 ## Features
 
 Display symfony profiler tokens directly into VSCode.
