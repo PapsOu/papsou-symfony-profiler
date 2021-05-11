@@ -1,5 +1,7 @@
 # papsou-symfony-profiler README
 
+[![CodeQL](https://github.com/PapsOu/papsou-symfony-profiler/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/PapsOu/papsou-symfony-profiler/actions/workflows/codeql-analysis.yml)
+
 ![Extension in action](img/readme.png)
 
 ## Features
