@@ -1,4 +1,4 @@
-# papsou-symfony-profiler README
+# Papsou Symfony Profiler
 
 [![CodeQL](https://github.com/PapsOu/papsou-symfony-profiler/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/PapsOu/papsou-symfony-profiler/actions/workflows/codeql-analysis.yml)
 
@@ -14,7 +14,7 @@ Having access to the Symfony's dev cache folder.
 
 ## Extension Settings
 
-This extension contributes the following settings:
+This extension have following settings (should be defined in workspace, not global):
 
 * `papsou-symfony-profiler.symfonyCacheDir`: the project root relative cache directory path. e.g: `var/cache/dev`
 * `papsou-symfony-profiler.ignoreUrlRegex`: an array of regexp used to ignore some request urls. e.g: ["style\\.css$", ".*\\.map$"]
@@ -22,7 +22,14 @@ This extension contributes the following settings:
 
 ## Known Issues
 
+No issues
+
 ## Release Notes
+
+### 1.1.9
+
+Remove unused svg
+Remove alert message when no profiler is detected
 
 ### 1.1.8
 

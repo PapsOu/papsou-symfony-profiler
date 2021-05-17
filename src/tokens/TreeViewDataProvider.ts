@@ -32,7 +32,6 @@ export class TreeViewDataProvider implements vscode.TreeDataProvider<Token> {
         if (!element) {
             const profilerPath = path.join(this.devCachePath, 'profiler')
             if (!this.pathExists(profilerPath)) {
-                vscode.window.showInformationMessage(`No profiler in path ${profilerPath} .`)
                 return Promise.resolve([])
             }
 
