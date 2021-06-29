@@ -110,6 +110,7 @@ export class TreeViewDataProvider implements vscode.TreeDataProvider<Token> {
             this.watcher.dispose()
         }
         this.profilerIndexFilePath = path.join(this.devCachePath, 'profiler', 'index.csv')
+        console.log('Watching ' + this.profilerIndexFilePath)
         this.watcher = vscode.workspace.createFileSystemWatcher(this.profilerIndexFilePath)
 
         this.watcher.onDidChange(() => {

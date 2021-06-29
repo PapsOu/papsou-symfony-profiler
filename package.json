@@ -4,7 +4,7 @@
   "repository": "https://github.com/PapsOu/papsou-symfony-profiler",
   "displayName": "Symfony Profiler",
   "description": "List and access symfony profilers information directly in Visual Studio Code.",
-  "version": "1.1.9",
+  "version": "1.1.11",
   "icon": "img/icon.png",
   "engines": {
     "vscode": "^1.55.0"
@@ -93,7 +93,7 @@
         },
         "papsou-symfony-profiler.profilerBaseUrl": {
           "type": "string",
-          "description": "The public accessible URL of the profiler (without or without trailing slash). e.g http://127.0.0.1/app_dev.php/_profiler/"
+          "description": "The public accessible URL of the profiler (with or without trailing slash). e.g http://127.0.0.1/app_dev.php/_profiler/"
         },
         "papsou-symfony-profiler.ignoreUrlRegex": {
           "type": "array",

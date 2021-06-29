@@ -26,6 +26,11 @@ No issues
 
 ## Release Notes
 
+### 1.1.11
+
+- Fix profiler styles
+- Fix sf toggle auto scroll-to-top links
+
 ### 1.1.9
 
 - Remove unused svg
