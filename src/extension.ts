@@ -7,6 +7,7 @@ import { get, IncomingMessage } from 'http'
 
 import { TreeViewDataProvider } from './tokens/TreeViewDataProvider'
 import { Token } from './tokens/Token'
+import { TokenIndexItem } from './tokens/TokenIndexItem'
 
 export function activate(context: vscode.ExtensionContext) {
     let profilerWebViewInstance: vscode.WebviewPanel | undefined
@@ -27,8 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     vscode.window.createTreeView('papsou-symfony-profiler-view', {
         treeDataProvider: tokenListProvider,
-        showCollapseAll: true,
-        canSelectMany: true
+        showCollapseAll: false,
+        canSelectMany: false
     })
 
     const commands = [
@@ -89,16 +90,28 @@ export function activate(context: vscode.ExtensionContext) {
                         )
                     }
                 })
-            } else {
-                rimraf(profilerPath, (err) => {
-                    if (err !== null) {
-                        console.error(err)
-                        vscode.window.showErrorMessage(`Cannot remove profiler dir ${profilerPath}`)
-                    }
-
-                    tokenListProvider.refresh()
-                })
             }
+        }),
+
+        // PURGE ALL
+
+        vscode.commands.registerCommand('papsou-symfony-profiler.purge-all', (token?: Token) => {
+            let profilerPath = path.join(
+                wsRoot,
+                vscode.workspace
+                    .getConfiguration('papsou-symfony-profiler')
+                    .get('symfonyCacheDir', 'var/cache/dev'),
+                'profiler'
+            )
+
+            rimraf(profilerPath, (err) => {
+                if (err !== null) {
+                    console.error(err)
+                    vscode.window.showErrorMessage(`Cannot remove profiler dir ${profilerPath}`)
+                }
+
+                tokenListProvider.refresh()
+            })
         }),
 
         // OPEN TOKEN
@@ -165,6 +178,9 @@ export function activate(context: vscode.ExtensionContext) {
                                                     if (message.url.includes('?')) {
                                                         token.tokenUrl = `${token.token.token}?${message.url.split('?')[1]}`
                                                         vscode.commands.executeCommand('papsou-symfony-profiler.open-token', token)
+                                                    } else if (message.url.endsWith('_profiler/phpinfo')) {
+                                                        let tempToken = new Token(new TokenIndexItem(['phpinfo','','','',0,null,200]))
+                                                        vscode.commands.executeCommand('papsou-symfony-profiler.open-token', tempToken)
                                                     }
                                                 } else if (message.command == 'open-native-link') {
 

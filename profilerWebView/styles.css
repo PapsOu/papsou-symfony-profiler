@@ -60,13 +60,15 @@ td,
 .exception-summary,
 .trace-details,
 pre.sf-dump .sf-dump-search-wrapper > *,
-pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input {
+pre.sf-dump .sf-dump-search-wrapper > input.sf-dump-search-input,
+.v {
     background-color: #333;
     color: #999;
 }
 
 #collector-content .sf-dump pre.sf-dump,
 #collector-content .sf-dump .trace,
+tr.h > th,
 .sql-runnable {
     background-color: #222;
     color: #999;
@@ -98,7 +100,8 @@ table thead th,
 .trace-code,
 .trace-line:hover,
 pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-next,
-pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous {
+pre.sf-dump .sf-dump-search-wrapper > .sf-dump-search-input-previous,
+.e {
     background-color: #222;
     color: #666;
 }
@@ -122,11 +125,20 @@ pre.sf-dump .sf-dump-search-wrapper > *,
     border-color: #444;
 }
 
+body .sf-profiler-timeline canvas,
+body  .trace-code li.selected {
+    background-color: #111;
+}
+
 .sf-profiler-timeline canvas,
 .trace-code li.selected {
     background-color: #BBB;
 }
 
-.highlight .symbol {
+.highlight .symbol,
+tr.h > th {
     color: #218BC3;
+}
+body div.center > table {
+    box-shadow: 1px 2px 3px #111;
 }

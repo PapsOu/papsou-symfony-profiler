@@ -2,10 +2,9 @@ import * as vscode from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as csv from 'csv-parse'
-import { PathLike } from 'node:fs'
+import { PathLike } from 'fs'
 
 import { Token } from './Token'
-import { TokenExpandedInfo } from './TokenExpandedInfo'
 import { TokenIndexItem } from './TokenIndexItem'
 
 export class TreeViewDataProvider implements vscode.TreeDataProvider<Token> {
@@ -67,21 +66,9 @@ export class TreeViewDataProvider implements vscode.TreeDataProvider<Token> {
                         resolve(results)
                     })
             })
-        } else {
-            if (element.token.detailDisplayed === false) {
-                element.token.detailDisplayed = true
-                return Promise.resolve([
-                    new TokenExpandedInfo(element.token, 'token'),
-                    new TokenExpandedInfo(element.token, 'clientIp'),
-                    new TokenExpandedInfo(element.token, 'method'),
-                    new TokenExpandedInfo(element.token, 'url'),
-                    new TokenExpandedInfo(element.token, 'time'),
-                    new TokenExpandedInfo(element.token, 'status')
-                ])
-            } else {
-                return Promise.resolve([])
-            }
         }
+
+        return Promise.resolve([])
     }
 
     private pathExists(p: string): boolean {

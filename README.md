@@ -26,6 +26,10 @@ No issues
 
 ## Release Notes
 
+### 1.1.12
+
+- Remove useless details expanding on tree view item click
+
 ### 1.1.11
 
 - Fix profiler styles

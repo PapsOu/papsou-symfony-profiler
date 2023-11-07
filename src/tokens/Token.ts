@@ -9,7 +9,7 @@ export class Token extends vscode.TreeItem {
     constructor(
         public readonly token: TokenIndexItem
     ) {
-        super('', vscode.TreeItemCollapsibleState.Collapsed)
+        super('', vscode.TreeItemCollapsibleState.None)
 
         let status = 'unknown'
 
@@ -30,6 +30,14 @@ export class Token extends vscode.TreeItem {
 
         this.label = this.generateLabel()
         this.contextValue = 'profiler-entry'
+
+        this.command = {
+            'title': 'open token',
+            'command': 'papsou-symfony-profiler.open-token',
+            'arguments': [
+                this
+            ]
+        }
     }
 
     public generateLabel(): string {
@@ -38,14 +46,6 @@ export class Token extends vscode.TreeItem {
         tokenDate.setTime(this.token.time * 1000)
 
         return `${this.token.method} ${this.token.status.toString()} - ${this.token.url}`
-    }
-
-    public setExpanded(): void {
-        this.collapsibleState = vscode.TreeItemCollapsibleState.Expanded
-    }
-
-    public setCollapsed(): void {
-        this.collapsibleState = vscode.TreeItemCollapsibleState.Collapsed
     }
 
     private padString(str: string, length: number): string {
